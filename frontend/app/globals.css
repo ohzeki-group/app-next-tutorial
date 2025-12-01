@@ -1,0 +1,581 @@
+/* ====== Base Reset / Theme ====== */
+
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  color-scheme: light;
+  --qa-bg: #f3f4f6;
+  --qa-fg: #0f172a;
+  --qa-card-bg: #ffffff;
+  --qa-border: #e5e7eb;
+  --qa-accent: #2563eb;
+  --qa-accent-soft: #dbeafe;
+  --qa-muted: #6b7280;
+  --qa-chip-bg: #e5e7eb;        /* ライトの背景 */
+  --qa-chip-fg: #374151;        /* ライトの文字 */
+  --qa-chip-bg-secondary: #dbeafe;
+  --qa-chip-fg-secondary: #1e3a8a;
+}
+
+/* data-theme="dark" のときに上書き */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --qa-bg: #020617;
+  --qa-fg: #e5e7eb;
+  --qa-card-bg: #020617;
+  --qa-border: #1f2937;
+  --qa-accent: #60a5fa;
+  --qa-accent-soft: #1d4ed8;
+  --qa-muted: #9ca3af;
+  --qa-chip-bg: #334155;        /* ダーク背景・暗めブルーグレー */
+  --qa-chip-fg: #e2e8f0;        /* ダーク文字 */
+  --qa-chip-bg-secondary: #1e3a8a;
+  --qa-chip-fg-secondary: #bfdbfe; 
+}
+
+/* ============================
+   Dark mode: form elements
+   ============================ */
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select {
+  background-color: #0f172a;     /* より濃い背景 */
+  color: #e5e7eb;                /* 明るい文字色 */
+  border-color: #334155;         /* 若干明るめの枠 */
+}
+
+:root[data-theme="dark"] textarea::placeholder,
+:root[data-theme="dark"] input::placeholder {
+  color: #64748b;                /* 見えるけど主張しない薄グレー */
+}
+
+:root[data-theme="dark"] textarea:focus,
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus {
+  background-color: #1e293b;
+  border-color: var(--qa-accent);
+  outline: 2px solid var(--qa-accent-soft);
+}
+
+
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: var(--qa-bg);
+  color: var(--qa-fg);
+}
+
+/* リンクのデフォルト */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ====== Layout ====== */
+
+.qa-header {
+  border-bottom: 1px solid var(--qa-border);
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.qa-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qa-logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.qa-nav a {
+  margin-left: 1rem;
+  font-size: 0.95rem;
+  color: #cbd5f5;
+}
+
+.qa-nav a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.qa-main {
+  max-width: 960px;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1rem;
+}
+
+/* ====== Landing (トップ) ====== */
+
+.qa-landing {
+  text-align: center;
+}
+
+.qa-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.qa-subtitle {
+  color: var(--qa-muted);
+  margin-bottom: 2rem;
+}
+
+.qa-card-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .qa-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.qa-card {
+  border-radius: 0.9rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--qa-border);
+  background: var(--qa-card-bg);
+  text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.qa-card h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.qa-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--qa-muted);
+}
+
+.qa-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.09);
+  border-color: var(--qa-accent);
+}
+
+/* ====== Problem Pages 共通 ====== */
+
+.qa-page-header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.qa-page-header p {
+  color: var(--qa-muted);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.qa-solver-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .qa-solver-grid {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: flex-start;
+  }
+}
+
+.qa-panel {
+  border-radius: 0.9rem;
+  border: 1px solid var(--qa-border);
+  padding: 1.25rem 1.5rem 1.4rem;
+  background: var(--qa-card-bg);
+}
+
+.qa-panel h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem;
+}
+
+.qa-panel-desc {
+  color: var(--qa-muted);
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+
+/* ====== Form Elements ====== */
+
+.qa-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.qa-field span {
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.qa-field textarea,
+.qa-field input,
+.qa-field select {
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  padding: 0.45rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: #f9fafb;
+}
+
+.qa-field textarea {
+  resize: vertical;
+}
+
+.qa-field textarea:focus,
+.qa-field input:focus,
+.qa-field select:focus {
+  outline: 2px solid var(--qa-accent-soft);
+  border-color: var(--qa-accent);
+  background-color: #ffffff;
+}
+
+.qa-field-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.qa-field-inline {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 130px;
+  gap: 0.3rem;
+}
+
+/* ====== Buttons / States ====== */
+
+.qa-button-primary {
+  margin-top: 0.5rem;
+  border-radius: 999px;
+  padding: 0.5rem 1.3rem;
+  border: none;
+  background: var(--qa-accent);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  transition: transform 0.08s ease, box-shadow 0.08s ease,
+    background-color 0.08s ease;
+}
+
+.qa-button-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.35);
+  background-color: #1d4ed8;
+}
+
+.qa-button-primary:disabled {
+  background: #9ca3af;
+  box-shadow: none;
+  cursor: default;
+}
+
+.qa-error {
+  margin-top: 0.6rem;
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+.qa-placeholder {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* ====== Result View ====== */
+
+.qa-result {
+  margin-top: 0.5rem;
+}
+
+.qa-result-summary {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.qa-result-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.qa-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--qa-muted);
+}
+
+.qa-assignment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.qa-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.8rem;
+  background: var(--qa-chip-bg);
+  color: var(--qa-chip-fg);
+}
+
+.qa-chip-secondary {
+  background: var(--qa-chip-bg-secondary);
+  color: var(--qa-chip-fg-secondary);
+}
+
+
+.qa-arrow {
+  font-size: 0.8rem;
+  margin: 0 0.35rem;
+}
+
+
+.qa-theme-toggle {
+  margin-left: 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--qa-border);
+  background: rgba(15, 23, 42, 0.4);
+  color: #f9fafb;
+  width: 32px;
+  height: 32px;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.qa-theme-toggle:hover {
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.qa-energy {
+  margin-top: 1.2rem;
+}
+
+.qa-energy h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.qa-energy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.qa-energy-table th,
+.qa-energy-table td {
+  padding: 0.25rem 0.4rem;
+  text-align: right;
+  border-bottom: 1px solid var(--qa-border);
+}
+
+.qa-energy-table th:first-child,
+.qa-energy-table td:first-child {
+  text-align: left;
+}
+
+.qa-energy-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qa-energy-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+}
+
+.qa-energy-label {
+  width: 4.5rem;
+  color: var(--qa-muted);
+}
+
+.qa-energy-bar-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.25);
+  overflow: hidden;
+}
+
+.qa-energy-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--qa-accent-soft),
+    var(--qa-accent)
+  );
+}
+
+.qa-energy-count {
+  width: 2.2rem;
+  text-align: right;
+  color: var(--qa-muted);
+}
+
+
+.qa-constraints {
+  margin-top: 1rem;
+}
+
+.qa-constraints-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.qa-tag-ok,
+.qa-tag-ng {
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: white;
+}
+
+.qa-tag-ok {
+  background: #16a34a;
+}
+
+.qa-tag-ng {
+  background: #dc2626;
+}
+
+.qa-constraints-note {
+  font-size: 0.8rem;
+  color: var(--qa-muted);
+}
+
+.qa-constraints-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.qa-constraints-table th,
+.qa-constraints-table td {
+  padding: 0.25rem 0.4rem;
+  border-bottom: 1px solid var(--qa-border);
+  text-align: left;
+}
+
+.qa-constraints-detail {
+  font-size: 0.75rem;
+  color: var(--qa-muted);
+}
+
+.qa-pill-ok,
+.qa-pill-ng {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.qa-pill-ok {
+  background: #22c55e;
+}
+
+.qa-pill-ng {
+  background: #ef4444;
+}
+
+
+.qa-backend-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 1rem;
+  font-size: 0.75rem;
+  color: #e5e7eb;
+}
+
+.qa-backend-status-text {
+  opacity: 0.85;
+}
+
+.qa-backend-status-time {
+  margin-left: 0.2rem;
+  opacity: 0.7;
+}
+
+/* 小さな丸ランプ */
+.qa-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #9ca3af;
+}
+
+.qa-status-ok {
+  background: #22c55e; /* 緑 */
+}
+
+.qa-status-degraded {
+  background: #eab308; /* 黄 */
+}
+
+.qa-status-down {
+  background: #ef4444; /* 赤 */
+}
+
+.qa-status-idle {
+  background: #9ca3af; /* グレー */
+}

@@ -1,0 +1,9 @@
+[tools]
+pnpm = "latest"
+uv = "latest"
+
+[tasks.frontend-dev]
+run = "cd frontend && pnpm dev"
+
+[tasks.backend-dev]
+run = "cd backend && uv run uvicorn main:app --reload --port 8000"
