@@ -30,14 +30,6 @@ Node / pnpm / uv / Python などのバージョン管理を行います。
 
 🔗 https://mise.jdx.dev/getting-started.html
 
-macOS / Linux なら：
-
-```bash
-curl https://mise.jdx.dev/install.sh | sh
-```
-
-Windows + WSL2 でも同じコマンドで導入できます。
-
 ---
 
 # 📦 プロジェクトのインストール手順
@@ -72,7 +64,15 @@ mise install
 
 ---
 
-## 3. backend の依存関係インストール（uv）
+## 3. （ローカルでbackend APIを立ち上げたい人向け） backend の依存関係インストール（uv）
+
+イベント期間中はチュートリアル用のbackendAPIを外部公開しています。
+
+API Docs: https://nextjs-tutorial-backend.yuuma.dev/docs
+
+そちらを利用したい方は、4. frontend の依存関係インストールに進んでください。
+
+ローカルでQUBOソルバーのバックエンドを構築したい人は、次のコマンドでPythonの環境構築を行います。
 
 ```bash
 cd backend
@@ -88,11 +88,44 @@ cd frontend
 pnpm install
 ```
 
+### 環境変数の設定
+frontendからbackendへの接続を行うため、`.env.local` に環境変数を設定しています。
+デフォルトではローカルのbackendサーバを利用する設定になっていますが、チュートリアル用の外部公開APIを利用したい場合は次のように書き換えてください：
+
+```diff
+- NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
++ NEXT_PUBLIC_API_BASE_URL=https://nextjs-tutorial-backend.yuuma.dev
+```
+
 ---
 
-# ▶️ ローカル実行（docker を使わない場合）
+# ▶️ ローカル実行
 
 `mise.toml` に task を定義しているので、コマンドはとてもシンプルです。
+
+- `frontend-dev`：Next.jsを動作させるコマンド
+- `backend-dev`：Pythonを動作させるコマンド
+
+チュートリアル用の外部公開APIを利用したい場合は、Next.jsのみを起動すれば良いので、`backend-dev`は実行しなくてOKです。
+
+
+---
+
+## ⚡ Frontend（Next.js）を起動
+
+```bash
+mise run frontend-dev
+```
+
+内部では次のコマンドが実行されています：
+
+```bash
+cd frontend
+pnpm dev
+```
+
+- http://localhost:3000 にアクセス  
+- UI 側は自動リロード（HMR）に対応します  
 
 ---
 
@@ -112,23 +145,8 @@ uv run uvicorn main:app --reload --port 8000
 - http://localhost:8000/docs → API ドキュメントが確認できます  
 - `--reload` によりコード変更時に即ホットリロードされます
 
----
-
-## ⚡ Frontend（Next.js）を起動
-
-```bash
-mise run frontend-dev
-```
-
-内部では次のコマンドが実行されています：
-
-```bash
-cd frontend
-pnpm dev
-```
-
-- http://localhost:3000 にアクセス  
-- UI 側は自動リロード（HMR）に対応します  
+### ⚠️ 注意
+初回起動時は結構な時間がかかります。Warningメッセージも出てきますが、無視してもらってOKです。
 
 ---
 
